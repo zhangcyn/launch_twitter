@@ -1,4 +1,8 @@
 class TweetsController < ApplicationController
+
+	before_action :authenticate_user!
+
+
 	def new
 		@tweet = Tweet.new
 	end
@@ -9,6 +13,7 @@ class TweetsController < ApplicationController
 		# @tweet.save
 
 		@tweet = Tweet.new(tweet_params)
+		@tweet.user = current_user
 		if @tweet.save
 			flash[:success] = "Your tweet was successfully published!"
 			redirect_to new_tweet_path
