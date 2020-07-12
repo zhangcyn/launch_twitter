@@ -37,13 +37,20 @@
 
         <%= link_to "Sign In", new_user_session_path, class: 'nav-link' %>
       <% end %>
-      
+
     </nav>
 
 
 
 
     <div class="container-fluid">
+      <% if flash.any? %>
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>" role="alert">
+            <%= value %>
+          </div>
+        <% end %>
+      <% end %>
       <%= yield %>
     </div>
 
